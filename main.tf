@@ -37,8 +37,8 @@ resource "azurerm_dev_test_lab" "lab" {
 
 resource "azurerm_storage_account" "azurerm_dev_test_lab_storage" {
   name                     = "storageaccountname"
-  resource_group_name      = azurerm_resource_group.example.name
-  location                 = azurerm_resource_group.example.location
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
   min_tls_version          = "TLS1_2"
