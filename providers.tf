@@ -5,14 +5,14 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~>2.0"
     }
-  
+
     random = {
       source  = "hashicorp/random"
       version = "~>3.0"
     }
   }
 
-    backend "azurerm" {
+  backend "azurerm" {
     resource_group_name  = "terraform-github-actions"
     storage_account_name = "terraformgithubpoc"
     container_name       = "tfstatefile"
@@ -23,5 +23,6 @@ terraform {
 
 provider "azurerm" {
   features {}
-   use_oidc = true
+  use_oidc = true
+
 }
