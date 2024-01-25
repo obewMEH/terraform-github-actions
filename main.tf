@@ -29,9 +29,19 @@ locals {
 }
 
 resource "azurerm_dev_test_lab" "lab" {
-  name                = var.lab_name
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  name                       = var.lab_name
+  location                   = azurerm_resource_group.rg.location
+  resource_group_name        = azurerm_resource_group.rg.name
+  default_storage_account_id = azurerm_storage_account.azurerm_dev_test_lab_storage.id
+}
+
+resource "azurerm_storage_account" "azurerm_dev_test_lab_storage" {
+  name                     = "storageaccountname"
+  resource_group_name      = azurerm_resource_group.example.name
+  location                 = azurerm_resource_group.example.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  min_tls_version          = "TLS1_2"
 }
 
 resource "azurerm_dev_test_virtual_network" "vnet" {
@@ -39,6 +49,8 @@ resource "azurerm_dev_test_virtual_network" "vnet" {
   lab_name            = azurerm_dev_test_lab.lab.name
   resource_group_name = azurerm_resource_group.rg.name
 }
+
+
 
 resource "azurerm_dev_test_windows_virtual_machine" "vm" {
   name                   = "ExampleVM-${random_string.vm_suffix.result}"
