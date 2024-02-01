@@ -14,12 +14,12 @@ terraform {
     storage_account_name = "terraformgithubpoc"
     container_name       = "tfstatefile"
     key                  = "state"
-    use_oidc             = false
+    use_oidc             = true
   }
 }
 
 provider "azurerm" {
   features {}
-  use_oidc = false
+  use_oidc = true
 
 }
